@@ -48,7 +48,12 @@ jobs:
         run: |
           git log --format=format:" - %s" ${{ steps.compute_version.outputs.current_version }}..HEAD | cut -d' ' -f2- > changelog.txt
           grep FEATURE changelog.txt && grep IMPROVEMENT changelog.txt && grep BUGFIX changelog.txt && grep DEPRECATION changelog.txt && grep DOCS changelog.txt > tmp && mv tmp changelog.txt
-          head -2 CHANGELOG.md > tmp && cat changelog.txt >> tmp && tail -n +3 CHANGELOG.md >> tmp && mv tmp CHANGELOG.md
+          head -2 CHANGELOG.md > tmp
+          echo "# ${{ steps.compute_version.outputs.new_version }} / $(date "+%Y-%m-%d")" >> tmp
+          cat changelog.txt >> tmp
+          echo "" >> tmp
+          tail -n +3 CHANGELOG.md >> tmp
+          mv tmp CHANGELOG.md
       - name: Update version
         run: sed -i "s/${{ steps.compute_version.outputs.current_version }}/${{ steps.compute_version.outputs.new_version }}/" defaults/main.yml
       - name: Set up Git
