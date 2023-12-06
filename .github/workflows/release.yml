@@ -50,7 +50,7 @@ jobs:
           grep FEATURE changelog.txt && grep IMPROVEMENT changelog.txt && grep BUGFIX changelog.txt && grep DEPRECATION changelog.txt && grep DOCS changelog.txt > tmp && mv tmp changelog.txt
           head -2 CHANGELOG.md > tmp && cat changelog.txt >> tmp && tail -n +3 CHANGELOG.md >> tmp && mv tmp CHANGELOG.md
       - name: Update version
-        run: sed -i "s/${{ steps.compute_version.outputs.current_version }}/${{ steps.compute_version.outputs.new_version }}/" defaults/main.yaml
+        run: sed -i "s/${{ steps.compute_version.outputs.current_version }}/${{ steps.compute_version.outputs.new_version }}/" defaults/main.yml
       - name: Set up Git
         run: |
           git config --global user.email "actions@github.com"
