@@ -80,9 +80,9 @@ jobs:
               --title="$new / $(date "+%Y-%m-%d")" \
               --notes="$body"
       - name: setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: 3.11
       - name: Install ansible
         run: |
           python -m pip install --upgrade pip
