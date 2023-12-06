@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+# 4.23.0 / 2023-12-06
+- [FEATURE] improve the changelog
+- [BUGFIX] revert to previous version of action
+- [DOCS] fix changelog
+
 # 4.22.0 / 2023-12-06
 - [BUGFIX] change file name
 - [IMPROVEMENT] add call to ansible
