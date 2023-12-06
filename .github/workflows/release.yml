@@ -75,7 +75,7 @@ jobs:
               --title="$new / $(date "+%Y-%m-%d")" \
               --notes="$body"
       - name: setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
       - name: Install ansible
