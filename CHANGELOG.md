@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+# 4.24.0 / 2023-12-06
+- [BUGFIX] trailing quote
+- [BUGFIX] cannot use python 3.12
+
 # 4.23.0 / 2023-12-06
 - [FEATURE] improve the changelog
 - [BUGFIX] revert to previous version of action
