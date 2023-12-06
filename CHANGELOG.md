@@ -1,5 +1,8 @@
 CHANGELOG
 =========
+- [BUGFIX] change file name
+- [IMPROVEMENT] add call to ansible
+- [FEATURE] add a release workflow
 # 4.21.0 / 2023-12-04
 * [FEATURE] [Windows] Force reinstall if configuration changed [AP-1946] [#509]
 * [FEATURE] Adding yum repo configuration options [#517] thanks [@chipselden]
