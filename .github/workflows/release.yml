@@ -87,4 +87,4 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install ansible-core
-          echo "ansible-galaxy role import datadog ansible-datadog --token ${{ github.event.inputs.api_key }}""
+          echo "ansible-galaxy role import datadog ansible-datadog --token ${{ github.event.inputs.api_key }}"
