@@ -12,6 +12,10 @@ on:
           - "major"
           - "minor"
           - "patch"
+      api_key:
+        description: "Token to upload on ansible galaxy"
+        required: true
+        default: ""
 
 jobs:
   create_new_release:
@@ -42,7 +46,7 @@ jobs:
           echo "New $version version: $next_version"
       - name: Generate changelog
         run: |
-          git log --format=format:" - %s" 4.20.0..4.21.0 | cut -d' ' -f2- > changelog.txt
+          git log --format=format:" - %s" ${{ steps.compute_version.outputs.current_version }}..HEAD | cut -d' ' -f2- > changelog.txt
           grep FEATURE changelog.txt && grep IMPROVEMENT changelog.txt && grep BUGFIX changelog.txt && grep DEPRECATION changelog.txt && grep DOCS changelog.txt > tmp && mv tmp changelog.txt
           head -2 CHANGELOG.md > tmp && cat changelog.txt >> tmp && tail -n +3 CHANGELOG.md >> tmp && mv tmp CHANGELOG.md
       - name: Update version
@@ -64,8 +68,18 @@ jobs:
           fi
           release_name="Release $new"
           git commit -am "${release_name}"
+          git push origin main
           git tag "$new"
           git push origin "$new"
           gh release create "$new" \
               --title="$new / $(date "+%Y-%m-%d")" \
               --notes="$body"
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - name: Install ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible-core
+          echo "ansible-galaxy role import datadog ansible-datadog --token ${{ github.event.inputs.api_key }}""
